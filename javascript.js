@@ -22,18 +22,17 @@ addBookToLibrary("1984", "Herman Melville", 9002)
 
 console.log(myLibrary)
 
-function createCard(){
+addBookToLibrary("Unspeakable", "Jack Something", 225)
 
-}
 
 
 function displayBooks(){
     const container = document.querySelector("#container")
-    for (const item of myLibrary){
+    for (const book of myLibrary){
         const bookCard = document.createElement("div");
         bookCard.classList.add("book");
         container.appendChild(bookCard);
-        bookCard.textContent = item.title;
+        bookCard.textContent = book.title;
 
         const bookTitle = document.createElement("div");
         bookCard.appendChild(bookTitle);
@@ -70,13 +69,16 @@ function displayBooks(){
         const numText= document.createElement("div");
         pageNum.appendChild(numText);
         numText.textContent = book.page_count;
-
-
-        
-
-        // make divs 
-        // append and update text
     }
 }
 
 displayBooks()
+
+const form = document.getElementById("form");
+
+form.addEventListener("submit", function(event) {
+    event.preventDefault();
+    const formData = new FormData(form);
+    const formObject = Object.fromEntries(formData.entries());
+    return addBookToLibrary(formObject)
+})
