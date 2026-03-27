@@ -1,0 +1,10 @@
+div{
+    background-color: lightblue;
+    color: hotpink;
+}
+
+.info{
+    background-color: white;
+    border: 2px solid red;
+    display: flex;
+}
