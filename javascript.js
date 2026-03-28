@@ -1,4 +1,4 @@
-const myLibrary = [];
+let myLibrary = [];
 
 function Book(title, author, page_count) {
     this.title = title;
@@ -23,7 +23,7 @@ function displayBooks() {
     bookCard.classList.add("book");
     container.appendChild(bookCard);
     bookCard.textContent = newBook.title;
-    // bookCard.id = newBook.id;
+     bookCard.id = newBook.id;
 
     const bookTitle = document.createElement("div");
     bookCard.appendChild(bookTitle);
@@ -68,6 +68,7 @@ function displayBooks() {
     removeButton.classList = "delete"
 
     removeButton.addEventListener("click", () => {
+        myLibrary = myLibrary.filter(book=>book.id !== bookCard.id )
         bookCard.remove()
     })
 
@@ -111,6 +112,4 @@ form.addEventListener("submit", (e) => {
 })
 
 
-// make functions out of the create divs
-// add read or not read button
 // should delete from the array too
