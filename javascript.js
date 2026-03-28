@@ -23,6 +23,7 @@ function displayBooks() {
     bookCard.classList.add("book");
     container.appendChild(bookCard);
     bookCard.textContent = newBook.title;
+    // bookCard.id = newBook.id;
 
     const bookTitle = document.createElement("div");
     bookCard.appendChild(bookTitle);
@@ -63,22 +64,34 @@ function displayBooks() {
     const removeButton = document.createElement("button");
     bookCard.appendChild(removeButton);
     removeButton.textContent = "Delete";
-    removeButton.id = newBook.id;
+
     removeButton.classList = "delete"
-}
 
-const removeButton = document.getElementsByClassName("delete")
+    removeButton.addEventListener("click", () => {
+        bookCard.remove()
+    })
 
-removeButton.addEventListener("click", () => {
-    remove()
-   
-})
+    const readButton = document.createElement("button");
+    bookCard.appendChild(readButton);
+    readButton.textContent = "Toggle Read"
 
-// remove object from library array if button id matches newBook.id
+    const toReadOrNotToRead = document.createElement("div");
+    bookCard.appendChild(toReadOrNotToRead);
+    toReadOrNotToRead.textContent = "Have Not Read"
+
+    let clickCounter = 1;
+    readButton.addEventListener("click", () => {
+        ++clickCounter
+        if (clickCounter%2 == 0){
+        toReadOrNotToRead.textContent = "Have Read"}
+        else {
+            toReadOrNotToRead.textContent = "Have Not Read"
+
+        }
+
+    })
 
 
-
-function removeBook(){
 
 }
 
@@ -99,5 +112,5 @@ form.addEventListener("submit", (e) => {
 
 
 // make functions out of the create divs
-// add delete button
 // add read or not read button
+// should delete from the array too
