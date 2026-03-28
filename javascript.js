@@ -1,84 +1,103 @@
 const myLibrary = [];
 
-function Book(title, author, page_count){
+function Book(title, author, page_count) {
     this.title = title;
     this.author = author;
     this.page_count = page_count;
 
 }
 
-function addBookToLibrary(title, author, page_count){
+function addBookToLibrary(title, author, page_count) {
     let book = new Book(title, author, page_count);
     book.id = crypto.randomUUID();
     return myLibrary.push(book);
 }
 
-addBookToLibrary("A book title", "An author", 1234)
 
 
-console.log(myLibrary)
-
-addBookToLibrary("1984", "Herman Melville", 9002)
-
-console.log(myLibrary)
-
-addBookToLibrary("Unspeakable", "Jack Something", 225)
-
-
-
-function displayBooks(){
+function displayBooks() {
     const container = document.querySelector("#container")
-    for (const book of myLibrary){
-        const bookCard = document.createElement("div");
-        bookCard.classList.add("book");
-        container.appendChild(bookCard);
-        bookCard.textContent = book.title;
+    let newBook = myLibrary.at(-1)
 
-        const bookTitle = document.createElement("div");
-        bookCard.appendChild(bookTitle);
-        bookTitle.classList.add("info");
+    const bookCard = document.createElement("div");
+    bookCard.classList.add("book");
+    container.appendChild(bookCard);
+    bookCard.textContent = newBook.title;
 
-        const title = document.createElement("div");
-        bookTitle.appendChild(title);
-        title.textContent = "Title:";
+    const bookTitle = document.createElement("div");
+    bookCard.appendChild(bookTitle);
+    bookTitle.classList.add("info");
 
-        const titleText = document.createElement("div");
-        bookTitle.appendChild(titleText);
-        titleText.textContent = book.title;
+    const title = document.createElement("div");
+    bookTitle.appendChild(title);
+    title.textContent = "Title:";
 
-        const bookAuthor = document.createElement("div");
-        bookCard.appendChild(bookAuthor);
-        bookAuthor.classList.add("info");
+    const titleText = document.createElement("div");
+    bookTitle.appendChild(titleText);
+    titleText.textContent = newBook.title;
 
-        const author = document.createElement("div");
-        bookAuthor.appendChild(author);
-        author.textContent = "Author:";
+    const bookAuthor = document.createElement("div");
+    bookCard.appendChild(bookAuthor);
+    bookAuthor.classList.add("info");
 
-        const authorText= document.createElement("div");
-        bookAuthor.appendChild(authorText);
-        authorText.textContent = book.author;
+    const author = document.createElement("div");
+    bookAuthor.appendChild(author);
+    author.textContent = "Author:";
 
-        const pageNum = document.createElement("div")
-        bookCard.appendChild(pageNum);
-        pageNum.classList.add("info");
+    const authorText = document.createElement("div");
+    bookAuthor.appendChild(authorText);
+    authorText.textContent = newBook.author;
 
-        const num = document.createElement("div");
-        pageNum.appendChild(num);
-        num.textContent = "Page Number:";
+    const pageNum = document.createElement("div")
+    bookCard.appendChild(pageNum);
+    pageNum.classList.add("info");
 
-        const numText= document.createElement("div");
-        pageNum.appendChild(numText);
-        numText.textContent = book.page_count;
-    }
+    const num = document.createElement("div");
+    pageNum.appendChild(num);
+    num.textContent = "Page Number:";
+
+    const numText = document.createElement("div");
+    pageNum.appendChild(numText);
+    numText.textContent = newBook.page_count;
+
+    const removeButton = document.createElement("button");
+    bookCard.appendChild(removeButton);
+    removeButton.textContent = "Delete";
+    removeButton.id = newBook.id;
+    removeButton.classList = "delete"
 }
 
-displayBooks()
+const removeButton = document.getElementsByClassName("delete")
 
-const form = document.getElementById("form");
-
-form.addEventListener("submit", function(event) {
-    event.preventDefault();
-    const formData = new FormData(form);
-    const formObject = Object.fromEntries(formData.entries());
-    return addBookToLibrary(formObject)
+removeButton.addEventListener("click", () => {
+    remove()
+   
 })
+
+// remove object from library array if button id matches newBook.id
+
+
+
+function removeBook(){
+
+}
+
+
+
+const form = document.querySelector("form");
+
+form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const fd = new FormData(form);
+    console.log(fd)
+    const obj = Object.fromEntries(fd)
+    addBookToLibrary(obj.title, obj.author, obj.page_count);
+    displayBooks()
+    dialog.close()
+    form.reset()
+})
+
+
+// make functions out of the create divs
+// add delete button
+// add read or not read button
